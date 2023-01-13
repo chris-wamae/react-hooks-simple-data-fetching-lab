@@ -1,13 +1,16 @@
 // create your App component here
-import React,{useEffect} from "react"
+import React,{useEffect,useState} from "react"
 function App(){
+    const [src,fetchedSrc] = useState("")
     useEffect(() => {
     fetch("https://dog.ceo/api/breeds/image/random")
     .then((r) => r.json())
-    .then((d) => console.log(d))
-    })
-    return(
-    <></>
+    .then((d) => fetchedSrc(d.message))
+    },[]
     )
+    return(
+    src === "" ? <p>Loading...</p> :
+     <img src={src} alt="A Random Dog"></img>
+        )
 }
 export default App
